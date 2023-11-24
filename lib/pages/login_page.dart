@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ware_house_management/components/app_button.dart';
-import 'package:ware_house_management/components/app_textfield.dart';
-import 'package:ware_house_management/components/color.dart';
+
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -12,7 +10,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: splashClr,
+      backgroundColor: ,
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Form(
