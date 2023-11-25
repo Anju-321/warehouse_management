@@ -1,47 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ware_house_management/components/app_button.dart';
 
+import 'package:ware_house_management/components/app_textfield.dart';
+import 'package:ware_house_management/components/color.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
-  final _usernamecontroller = TextEditingController();
-  final _passwordcontroller = TextEditingController();
-  final formkey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
+    final usernameController = TextEditingController();
+    final passwordController = TextEditingController();
+
     return Scaffold(
-      backgroundColor: ,
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Form(
-          key: formkey,
+      body: Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: gradientClr)),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              AppTextField(text: "User name", controller: _usernamecontroller),
+              AppTextField(text: "Username", controller: usernameController),
               const SizedBox(
                 height: 20,
               ),
-              AppTextField(text: "Password", controller: _passwordcontroller),
-              const SizedBox(height: 16.0),
-              GestureDetector(
-                  onTap: () {
-                        if (formkey.currentState?.validate() ?? false) {
-                    
-                    debugPrint("Login Successful");
-                  }
-                  debugPrint("Hiii");
-                  },
-                  child: const Center(
-                    child: AppButton(
-                      text: 'Login',
-                      color: Color.fromARGB(255, 44, 38, 38), size: 16,
-                    ),
-                  ))
+              AppTextField(text: "Password", controller: passwordController),
+              const SizedBox(
+                height: 20,
+              ),
+              GestureDetector(onTap: (){
+                saveLoginStatus(true);
+                Navigator.of(context).pushNamed("Homepage");
+              },
+                  child: const AppButton(text: "Login", color: blackClr, size: 16),
+                  )
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> saveLoginStatus(bool isLoggedIn) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isLoggedIn', isLoggedIn);
   }
 }
