@@ -39,6 +39,7 @@ dependencies:
   animated_splash_screen: ^1.3.0
   http: ^1.1.0
   shared_preferences: ^2.2.2
+  fl_chart: ^0.65.0
  
 
 dev_dependencies:
@@ -80,7 +81,24 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: Lato-Regular
+      fonts:
+        - asset: assets/fonts/Lato-Regular.ttf
+          weight: 400
+    - family: DMSans-Regular
+      fonts:
+        - asset: assets/fonts/DMSans-Regular.ttf
+          weight: 400
+    - family: DMSans-Bold
+      fonts:
+        - asset: assets/fonts/DMSans_Bold.ttf
+          weight: 700
+    - family: Mulish-Bold
+      fonts:
+        - asset: assets/fonts/Mulish-Bold.ttf
+          weight: 700
+  
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

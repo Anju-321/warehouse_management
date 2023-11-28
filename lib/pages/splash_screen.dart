@@ -19,7 +19,7 @@ class SplashScreen extends StatelessWidget {
             return const CircularProgressIndicator();
           } else {
             if (snapshot.data == true) {
-              return const Homepage();
+              return  Homepage();
             } else {
               return LoginPage();
             }
