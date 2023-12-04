@@ -2,5 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-const splashClr =Color(0xFFc6b9f0);
-const splashClr1= Color(0xFFc8e1cc);
+
+const blackClr = Color(0xFF000000);
+const greyaccentClr = Color(0xFFEEEEEE);
+const whiteClr = Color(0xFFFFFFFF);
+const silveClr = Color(0xFFA8A9AD);

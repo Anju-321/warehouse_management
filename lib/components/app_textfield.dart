@@ -12,6 +12,7 @@ class AppTextField extends StatelessWidget {
           fillColor: Colors.white,
           border:  OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
           hintText: text),
+      
         controller: controller,
         validator: (value) {
           if (value == null || value.isEmpty) {

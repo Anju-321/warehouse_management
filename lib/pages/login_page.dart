@@ -12,7 +12,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: splashClr,
+     
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Form(
@@ -37,7 +37,8 @@ class LoginPage extends StatelessWidget {
                   child: const Center(
                     child: AppButton(
                       text: 'Login',
-                      color: Color.fromARGB(255, 44, 38, 38), size: 16,
+                      txtClr: Color.fromARGB(255, 44, 38, 38), size: 16, bgcolor: blackClr, height: 50, width: 150,
+                       navigator: '',
                     ),
                   ))
             ],
@@ -47,3 +48,6 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+
+
+
