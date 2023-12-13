@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ware_house_management/components/color.dart';
-import 'package:ware_house_management/pages/History/history.dart';
+import 'package:ware_house_management/pages/Movement/movementhistory.dart';
+
 import 'package:ware_house_management/pages/home_page.dart';
 
 class BottomNavigations extends StatefulWidget {
@@ -19,7 +20,8 @@ class _BottomNAvigations extends State<BottomNavigations> {
       children: [
         BottomNavigationBar(
           items: const [
-            BottomNavigationBarItem(icon: Center(child: Icon(Icons.home, size: 45)), label: ""),
+            BottomNavigationBarItem(
+                icon: Center(child: Icon(Icons.home, size: 45)), label: ""),
             BottomNavigationBarItem(
                 icon: Center(child: Icon(Icons.history, size: 45)), label: "")
           ],
@@ -33,11 +35,12 @@ class _BottomNAvigations extends State<BottomNavigations> {
             setState(() {
               _currentIndex = index;
               if (_currentIndex == 0) {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => Homepage()));
+                // Navigator.of(context).pushReplacement(
+                //     MaterialPageRoute(builder: (context) => Homepage()));
+                Navigator.of(context).pushNamed('homepage');
               } else {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const History()));
+                    builder: (context) => const MovementHistory()));
               }
             });
           },

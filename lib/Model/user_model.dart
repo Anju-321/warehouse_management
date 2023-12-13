@@ -9,7 +9,7 @@ class UserModel {
     return {
       'username': username,
       'password': password,
-      'role':"superadmin"
+      
     };
   }
 }

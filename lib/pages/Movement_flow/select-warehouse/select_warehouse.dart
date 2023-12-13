@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:ware_house_management/components/app_bar.dart';
 import 'package:ware_house_management/components/app_button.dart';
 import 'package:ware_house_management/components/app_text.dart';
+import 'package:ware_house_management/components/bottomnav.dart';
 import 'package:ware_house_management/components/color.dart';
 import 'package:ware_house_management/components/warehose_dropdown.dart';
-
-import '../../components/app_bar.dart';
+import 'package:ware_house_management/pages/Movement_flow/select-product/select_product.dart';
 
 class WarehoseSelect extends StatelessWidget {
   const WarehoseSelect({super.key});
@@ -42,8 +43,8 @@ class WarehoseSelect extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: whiteClr),
                             color: whiteClr),
-                        child: const Warehouses(
-                          isSelected: true,
+                        child:  Warehouses(
+                        isSelected: true,
                         ),
                       ),
                       const AppText(text: "To", color: blackClr),
@@ -52,24 +53,39 @@ class WarehoseSelect extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: whiteClr),
                             color: whiteClr),
-                        child: const Warehouses(),
+                        child:  Warehouses(
+                          isSelected: false,
+                        ),
                       )
                     ]),
               ),
             ),
           ),
-          const Positioned(
+           Positioned(
               bottom: 30,
               right: 40,
-              child: AppButton(
-                text: "Next",
-                txtClr: greyaccentClr,
-                size: 16,
-                bgcolor: blackClr,
-                height: 50,
-                width: 150,
-                navigator: 'stock',
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>
+                    ProductselectPage()
+                  
+                  )
+                  );
+                  
+                },
+                child: const AppButton(
+                  text: "Next",
+                  txtClr: greyaccentClr,
+                  size: 16,
+                  bgcolor: blackClr,
+                  height: 50,
+                  width: 150,
+                           
+                ),
               ))
-        ]));
+        ]
+        ),
+             bottomNavigationBar: const BottomNavigations(),
+        );
   }
 }

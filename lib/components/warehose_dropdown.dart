@@ -1,49 +1,52 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ware_house_management/components/app_text.dart';
-import 'package:ware_house_management/components/color.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ware_house_management/Model/warehousemodel.dart';
+import 'package:ware_house_management/pages/Movement_flow/select-warehouse/cubit/selectwarehouse_cubit.dart';
 
-String? warehouseFromItems;
-String? warehouseToItems;
+class Warehouses extends StatelessWidget {
+  final bool? isSelected;
+  Warehouses({super.key, this.isSelected});
 
-class Warehouses extends StatefulWidget {
-  final bool isSelected;
-  const Warehouses({Key? key, this.isSelected = false}) : super(key: key);
-
-  @override
-  State<Warehouses> createState() => _WarehousesState();
-}
-
-class _WarehousesState extends State<Warehouses> {
-  String? selectedValue;
+  // String?selectedValue;
 
   @override
   Widget build(BuildContext context) {
-    List<String> warehouseItems = ['Warehouse A', 'Warehouse B', 'Warehouse C'];
-
-    return DropdownButton<String>(
-    
-      value: selectedValue,
-      onChanged: (String? newValue) {
-        setState(() {
-          selectedValue = newValue;
-          if (widget.isSelected) {
-            warehouseFromItems = selectedValue;
-          } else {
-            warehouseToItems = selectedValue;
-          }
-          debugPrint("$selectedValue");
-        });
-      },
-      hint: const AppText(
-        color: blackClr,
-        text: "Select your Warehouse",
+    return BlocProvider(
+      create: (context) => SelectwarehouseCubit(context),
+      child: BlocBuilder<SelectwarehouseCubit, SelectwarehouseState>(
+        builder: (context, state) {
+          final cubit = context.read<SelectwarehouseCubit>();
+          return state is MovementsData
+              ?
+              //  state is MovementsData==false?Text("data"):
+              DropdownButton(
+                  hint: const Text("Select Warehouse"),
+                  value: state.stateChange,
+                  onChanged: (String? newvalue) {
+                    final selectedWarehouse = state.data.firstWhere(
+                      (warehouse) => warehouse.warehousename == newvalue,
+                      orElse: () => Datum(
+                          warehousename: '',
+                          id: ''), // Provide a default Datum if not found
+                    );
+                    cubit.updateValue(
+                      selectedWarehouse.warehousename,
+                      selectedWarehouse.id,
+                       isSelected ?? false,
+                      );
+                  },
+                  items: state.data.map((Datum value) {
+                    return DropdownMenuItem<String>(
+                      value: value.warehousename,
+                      child: Text(value.warehousename),
+                    );
+                  }).toList())
+              : const CupertinoActivityIndicator();
+        },
       ),
-      items: warehouseItems.map((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
     );
   }
 }
+
+

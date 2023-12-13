@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:core';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -9,14 +10,15 @@ import '../Urls/url.dart';
 enum Method { get, post, put, delete }
 
 class Api {
-  static Future<Apiresponse> call(BuildContext context,
-      {required String endPoint, required Method method, Object? body}) async {
+  static Future<Apiresponse> call(
+    BuildContext context, {
+    required String endPoint,
+    required Method method,
+    Object? body,
+  }) async {
     try {
       final http.Response response;
-      final headers = {
-        'Content-Type': 'application/json',
-        "Authorization": " "
-      };
+      final headers = {'Content-Type': 'application/json', "Authorization": ""};
 
       //REST API METHOD
       switch (method) {
@@ -27,6 +29,7 @@ class Api {
 
           debugPrint("${baseUrl + endPoint} ($method)\n$body");
           debugPrint(response.body);
+          
           return Apiresponse.fromJson(response.statusCode, response.body);
 
         case Method.post:
@@ -65,6 +68,6 @@ class Api {
       // snackBar(context, message: e.toString());
       debugPrint("$e");
       return Apiresponse.fromJson(500, "{message:'$e'}");
-}
-}
+    }
+  }
 }
